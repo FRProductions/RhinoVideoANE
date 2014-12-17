@@ -63,7 +63,7 @@
     <target name="swc" description="Build SWC library">
         <mkdir dir="../temp/swc/content/"/>
 
-        <fileset dir="../actionscript/src" casesensitive="yes" id="classfiles">
+        <fileset dir="../as3/src" casesensitive="yes" id="classfiles">
             <include name="**/*.as"/>
         </fileset>
 
@@ -72,7 +72,7 @@
         </pathconvert>
 
         <exec executable="${flex.sdk}/bin/compc${bin.ext}" failonerror="true">
-            <arg line='-source-path ../actionscript/src'/>
+            <arg line='-source-path ../as3/src'/>
             <arg line='-output ../temp/swc/${name}.swc'/>
             <arg line='-swf-version=14'/>
             <arg line='-external-library-path+="${flex.sdk}/frameworks/libs/air/airglobal.swc"'/>
