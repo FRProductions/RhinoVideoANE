@@ -1,0 +1,14 @@
+# General
+build.config
+
+# Android
+android/bin
+.classpath
+
+# Xcode
+xcuserdata
+
+# OS
+Icon
+Thumbs.db
+.DS_Store
