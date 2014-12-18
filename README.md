@@ -1,7 +1,7 @@
-Air Native Extension for playing videos (iOS + Android)
-======================================
+Native Video Playback ANE (iOS + Android)
+=========================================
 
-This is an [Air native extension](http://www.adobe.com/devnet/air/native-extensions-for-air.html) for playing videos on iOS and Android.
+This is an [AIR Native Extension](http://www.adobe.com/devnet/air/native-extensions-for-air.html) for fullscreen video playback on iOS and Android.
 
 
 Installation
