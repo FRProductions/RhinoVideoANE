@@ -31,17 +31,22 @@ public class LoadVideoFunction implements FREFunction
   public FREObject call(FREContext context, FREObject[] args)
   {
     String url = null;
-    try
-    {
+    try {
       url = args[0].getAsString();
     }
-    catch (Exception e)
-    {
+    catch (Exception e) {
       e.printStackTrace();
       return null;
     }
     
-    Extension.context.getVideoView().setVideoURI(Uri.parse(url));
+    Extension.context.log("loading video " + url);
+    Extension.context.log("after parse " + Uri.parse(url));
+    String tsturl = "android.resource://com.captainmcfinn.SwimAndPlay/assets/" + url;
+    Extension.context.log("test URL " + tsturl);
+    Extension.context.log("test URL after parse " + Uri.parse(tsturl));
+    Extension.context.getVideoView().setVideoPath(tsturl);
+    
+    //Extension.context.getVideoView().setVideoURI(Uri.parse(url));
     
     return null;
   }

@@ -1,21 +1,3 @@
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright 2012 Freshplanet (http://freshplanet.com | opensource@freshplanet.com)
-//  
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//  
-//    http://www.apache.org/licenses/LICENSE-2.0
-//  
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
-//  
-//////////////////////////////////////////////////////////////////////////////////////
-
 package com.freshplanet.ane.AirVideo;
 
 import java.util.HashMap;
@@ -34,16 +16,19 @@ import android.widget.VideoView;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
-import com.freshplanet.ane.AirVideo.functions.EnableExitFunction;
 import com.freshplanet.ane.AirVideo.functions.EnablePauseFunction;
-import com.freshplanet.ane.AirVideo.functions.HidePlayerFunction;
+import com.freshplanet.ane.AirVideo.functions.EnableExitFunction;
 import com.freshplanet.ane.AirVideo.functions.LoadVideoFunction;
-import com.freshplanet.ane.AirVideo.functions.ResizePlayerFunction;
 import com.freshplanet.ane.AirVideo.functions.ShowPlayerFunction;
+import com.freshplanet.ane.AirVideo.functions.HidePlayerFunction;
+import com.freshplanet.ane.AirVideo.functions.DisposePlayerFunction;
 
 public class ExtensionContext extends FREContext implements OnCompletionListener, OnErrorListener, OnPreparedListener, OnClickListener
 {
-  public final String TAG = "[AirVideo]";
+  /**************************************************************************
+   * INSTANCE PROPERTIES
+   **************************************************************************/
+
   private VideoView _videoView = null;
   private int x = 0;
   private int y = 0;
@@ -53,6 +38,18 @@ public class ExtensionContext extends FREContext implements OnCompletionListener
   private boolean _isPauseEnabled = true;
   private boolean _isExitEnabled = true;
   
+  /**************************************************************************
+   * INSTANCE CONSTRUCTOR
+   **************************************************************************/
+
+  public ExtensionContext() {
+    System.out.println("hello from ExtensionContext!");
+  }
+  
+  /**************************************************************************
+   * INSTANCE METHODS
+   **************************************************************************/
+  
   @Override
   public void dispose() {}
 
@@ -61,12 +58,12 @@ public class ExtensionContext extends FREContext implements OnCompletionListener
   {
     Map<String, FREFunction> functions = new HashMap<String, FREFunction>();
     
-    functions.put("airVideoShowPlayer", new ShowPlayerFunction());
-    functions.put("airVideoHidePlayer", new HidePlayerFunction());
-    functions.put("airVideoLoadVideo", new LoadVideoFunction());
-    functions.put("airVideoResizeVideo", new ResizePlayerFunction());
     functions.put("airVideoEnablePause", new EnablePauseFunction());
     functions.put("airVideoEnableExit", new EnableExitFunction());
+    functions.put("airVideoLoadVideo", new LoadVideoFunction());
+    functions.put("airVideoShowPlayer", new ShowPlayerFunction());
+    functions.put("airVideoHidePlayer", new HidePlayerFunction());
+    functions.put("airVideoDisposePlayer", new DisposePlayerFunction());
     
     return functions;
   }
@@ -163,13 +160,13 @@ public class ExtensionContext extends FREContext implements OnCompletionListener
   
   public void onCompletion(MediaPlayer mp)
   {
-    dispatchStatusEventAsync("PLAYBACK_DID_FINISH", "OK");
+    dispatchStatusEventAsync("VIDEO_COMPLETED", "OK");
   }
 
   @Override
   public boolean onError(MediaPlayer mp, int what, int extra) 
   {
-    dispatchStatusEventAsync("VIDEO_PLAYBACK_ERROR", "OK");
+    dispatchStatusEventAsync("VIDEO_ERROR", "OK");
     isDisplayRectSet = false;
     return true;
   }
@@ -177,7 +174,19 @@ public class ExtensionContext extends FREContext implements OnCompletionListener
   // exit button click listener
   public void onClick(View view)
   {
-    dispatchStatusEventAsync("EXIT_BUTTON", "OK");
+    dispatchStatusEventAsync("VIDEO_USER_EXITED", "OK");
   }
   
+  public void log(String message)
+  {
+    dispatchStatusEventAsync("LOG_MESSAGE", message);
+  }
+  
+  /**************************************************************************
+   * STATIC PROPERTIES
+   **************************************************************************/
+
+  /**************************************************************************
+   * STATIC METHODS
+   **************************************************************************/
 }
