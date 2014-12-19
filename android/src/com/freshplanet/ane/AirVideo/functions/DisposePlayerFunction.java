@@ -10,7 +10,7 @@ public class DisposePlayerFunction implements FREFunction
   @Override
   public FREObject call(FREContext context, FREObject[] args)
   {
-    Extension.context.log("DisposePlayerFunction!");
+    Extension.context.disposePlayer();
     return null;
   }
 }

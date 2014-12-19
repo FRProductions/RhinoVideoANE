@@ -1,4 +1,4 @@
-package com.freshplanet.ane.AirVideo;
+package com.freshplanet.ane.AirVideo.video;
 
 import android.content.Context;
 import android.graphics.Color;
