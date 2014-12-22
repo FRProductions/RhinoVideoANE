@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Air Native Extension Build Scripts" default="package">
+<project name="ANE Build Script" default="package">
 
   <property file="build.config"/>
 

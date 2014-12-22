@@ -82,6 +82,7 @@ public class ExtensionContext extends FREContext implements
   public void loadVideo(String url)
   {
     log("loading video " + Uri.parse(url));
+    // TODO: support local videos
     getVideoView().setVideoURI(Uri.parse(url));
   }
 
