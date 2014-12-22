@@ -1,5 +1,5 @@
-Native Video Playback ANE (iOS + Android)
-=========================================
+Fullscreen Video Playback ANE
+=============================
 
 This is an [AIR Native Extension](http://www.adobe.com/devnet/air/native-extensions-for-air.html) for fullscreen video playback on iOS and Android.
 
@@ -7,7 +7,7 @@ This is an [AIR Native Extension](http://www.adobe.com/devnet/air/native-extensi
 Installation
 ---------
 
-The ANE binary (com.rhino.ane.NativeVideo.ane) is located in the *bin* folder.  Package the ANE binary with your app as appropriate.
+The ANE binary file is located at `bin\com.rhino.ane.NativeVideo.ane'.
 
 Native Extension ID is `com.rhino.ane.NativeVideo`.
 
@@ -15,7 +15,7 @@ Native Extension ID is `com.rhino.ane.NativeVideo`.
 Usage
 ---------
 
-This ANE can play video files from URLs or from relative local paths.
+Video files can be played from URLs or from relative local paths.
 
     // play video
     var natvid:NativeVideo = NativeVideo.instance();
