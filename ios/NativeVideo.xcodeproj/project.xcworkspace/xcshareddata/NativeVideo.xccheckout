@@ -12,8 +12,6 @@
 	<dict>
 		<key>2FDF69F26BF765791850C171EBB14E93F4CEADF8</key>
 		<string>https://github.com/FRProductions/SwimAndPlayApp</string>
-		<key>3952FD7912224F5A9187AF9540D679390D7E9E87</key>
-		<string>https://github.com/lowell-list/ANE-Video</string>
 		<key>3970013C2B0F7B8CFCB77CBF9E9B3CEF86EE2A52</key>
 		<string>https://github.com/FRProductions/RhinoVideoANE</string>
 	</dict>
@@ -23,8 +21,6 @@
 	<dict>
 		<key>2FDF69F26BF765791850C171EBB14E93F4CEADF8</key>
 		<string>../../../..</string>
-		<key>3952FD7912224F5A9187AF9540D679390D7E9E87</key>
-		<string>../../../../ANE-Video</string>
 		<key>3970013C2B0F7B8CFCB77CBF9E9B3CEF86EE2A52</key>
 		<string>../../..</string>
 	</dict>
@@ -43,14 +39,6 @@
 			<string>2FDF69F26BF765791850C171EBB14E93F4CEADF8</string>
 			<key>IDESourceControlWCCName</key>
 			<string></string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>3952FD7912224F5A9187AF9540D679390D7E9E87</string>
-			<key>IDESourceControlWCCName</key>
-			<string>ANE-Video</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>

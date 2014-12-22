@@ -1,5 +1,5 @@
 //
-// Prefix header for all source files of the 'AirVideo' target in the 'AirVideo' project
+// Prefix header for all source files of the 'NativeVideo' target in the 'NativeVideo' project
 //
 
 #ifdef __OBJC__
