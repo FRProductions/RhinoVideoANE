@@ -215,29 +215,29 @@ void NativeVideoContextInitializer(void* extData, const uint8_t* ctxType, FRECon
   
   FRENamedFunction* func = (FRENamedFunction*) malloc(sizeof(FRENamedFunction) * nbFuntionsToLink);
   
-  func[0].name = (const uint8_t*) "airVideoEnablePause";
+  func[0].name = (const uint8_t*) "anefncEnablePause";
   func[0].functionData = NULL;
-  func[0].function = &airVideoEnablePause;
+  func[0].function = &anefncEnablePause;
   
-  func[1].name = (const uint8_t*) "airVideoEnableExit";
+  func[1].name = (const uint8_t*) "anefncEnableExit";
   func[1].functionData = NULL;
-  func[1].function = &airVideoEnableExit;
+  func[1].function = &anefncEnableExit;
   
-  func[2].name = (const uint8_t*) "airVideoLoadVideo";
+  func[2].name = (const uint8_t*) "anefncLoadVideo";
   func[2].functionData = NULL;
-  func[2].function = &airVideoLoadVideo;
+  func[2].function = &anefncLoadVideo;
   
-  func[3].name = (const uint8_t*) "airVideoShowPlayer";
+  func[3].name = (const uint8_t*) "anefncShowPlayer";
   func[3].functionData = NULL;
-  func[3].function = &airVideoShowPlayer;
+  func[3].function = &anefncShowPlayer;
   
-  func[4].name = (const uint8_t*) "airVideoHidePlayer";
+  func[4].name = (const uint8_t*) "anefncHidePlayer";
   func[4].functionData = NULL;
-  func[4].function = &airVideoHidePlayer;
+  func[4].function = &anefncHidePlayer;
   
-  func[5].name = (const uint8_t*) "airVideoDisposePlayer";
+  func[5].name = (const uint8_t*) "anefncDisposePlayer";
   func[5].functionData = NULL;
-  func[5].function = &airVideoDisposePlayer;
+  func[5].function = &anefncDisposePlayer;
   
   *functionsToSet = func;
   
@@ -252,7 +252,7 @@ void NativeVideoContextFinalizer(FREContext ctx)
 #pragma mark - ANE FUNCTIONS
 /**************************************************************************/
 
-DEFINE_ANE_FUNCTION(airVideoEnablePause)
+DEFINE_ANE_FUNCTION(anefncEnablePause)
 {
   BOOL enb = getBOOLParameter(argv[0]);
   [NativeVideo instance].isPauseEnabled = enb;
@@ -260,7 +260,7 @@ DEFINE_ANE_FUNCTION(airVideoEnablePause)
   return nil;
 }
 
-DEFINE_ANE_FUNCTION(airVideoEnableExit)
+DEFINE_ANE_FUNCTION(anefncEnableExit)
 {
   BOOL enb = getBOOLParameter(argv[0]);
   [NativeVideo instance].isExitEnabled = enb;
@@ -268,7 +268,7 @@ DEFINE_ANE_FUNCTION(airVideoEnableExit)
   return nil;
 }
 
-DEFINE_ANE_FUNCTION(airVideoLoadVideo)
+DEFINE_ANE_FUNCTION(anefncLoadVideo)
 {
   NSString *      pth;        // user supplied path of video to load
   NSURL *         url;        // URL of video to load
@@ -304,21 +304,21 @@ DEFINE_ANE_FUNCTION(airVideoLoadVideo)
   return nil;
 }
 
-DEFINE_ANE_FUNCTION(airVideoShowPlayer)
+DEFINE_ANE_FUNCTION(anefncShowPlayer)
 {
   [NativeVideo log:@"show player"];
   [[NativeVideo instance] showPlayer];
   return nil;
 }
 
-DEFINE_ANE_FUNCTION(airVideoHidePlayer)
+DEFINE_ANE_FUNCTION(anefncHidePlayer)
 {
   [NativeVideo log:@"hide player"];
   [[NativeVideo instance] hidePlayer];
   return nil;
 }
 
-DEFINE_ANE_FUNCTION(airVideoDisposePlayer)
+DEFINE_ANE_FUNCTION(anefncDisposePlayer)
 {
   [NativeVideo log:@"dispose player"];
   [[NativeVideo instance] disposePlayer];

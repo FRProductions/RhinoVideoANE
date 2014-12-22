@@ -55,12 +55,12 @@ public class ExtensionContext extends FREContext implements
   {
     Map<String, FREFunction> functions = new HashMap<String, FREFunction>();
     
-    functions.put("airVideoEnablePause", new EnablePauseFunction());
-    functions.put("airVideoEnableExit", new EnableExitFunction());
-    functions.put("airVideoLoadVideo", new LoadVideoFunction());
-    functions.put("airVideoShowPlayer", new ShowPlayerFunction());
-    functions.put("airVideoHidePlayer", new HidePlayerFunction());
-    functions.put("airVideoDisposePlayer", new DisposePlayerFunction());
+    functions.put("anefncEnablePause", new EnablePauseFunction());
+    functions.put("anefncEnableExit", new EnableExitFunction());
+    functions.put("anefncLoadVideo", new LoadVideoFunction());
+    functions.put("anefncShowPlayer", new ShowPlayerFunction());
+    functions.put("anefncHidePlayer", new HidePlayerFunction());
+    functions.put("anefncDisposePlayer", new DisposePlayerFunction());
     
     return functions;
   }

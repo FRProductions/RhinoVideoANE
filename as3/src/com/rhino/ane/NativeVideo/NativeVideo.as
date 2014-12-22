@@ -50,7 +50,7 @@ package com.rhino.ane.NativeVideo
      */
     public function enablePause(enabled:Boolean):void {
       if(!isSupported) { log('not supported'); return; }
-      mContext.call("airVideoEnablePause",enabled);
+      mContext.call("anefncEnablePause",enabled);
     }
     
     /**
@@ -58,7 +58,7 @@ package com.rhino.ane.NativeVideo
      */
     public function enableExit(enabled:Boolean):void {
       if(!isSupported) { log('not supported'); return; }
-      mContext.call("airVideoEnableExit",enabled);
+      mContext.call("anefncEnableExit",enabled);
     }
     
     /**
@@ -71,7 +71,7 @@ package com.rhino.ane.NativeVideo
     public function loadVideo(url:String):void
     {
       if(!isSupported) { log('not supported'); return; }
-      mContext.call("airVideoLoadVideo",url);
+      mContext.call("anefncLoadVideo",url);
     }
     
     /**
@@ -80,7 +80,7 @@ package com.rhino.ane.NativeVideo
     public function showPlayer():void
     {
       if(!isSupported) { log('not supported'); return; }
-      mContext.call("airVideoShowPlayer");
+      mContext.call("anefncShowPlayer");
     }
     
     /**
@@ -89,7 +89,7 @@ package com.rhino.ane.NativeVideo
     public function hidePlayer():void
     {
       if(!isSupported) { log('not supported'); return; }
-      mContext.call("airVideoHidePlayer");
+      mContext.call("anefncHidePlayer");
     }
     
     /**
@@ -98,7 +98,7 @@ package com.rhino.ane.NativeVideo
     public function disposePlayer():void
     {
       if(!isSupported) { log('not supported'); return; }
-      mContext.call("airVideoDisposePlayer");
+      mContext.call("anefncDisposePlayer");
     }
     
     /**************************************************************************

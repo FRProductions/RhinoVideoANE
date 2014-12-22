@@ -31,12 +31,12 @@
 @end
 
 // C interface
-DEFINE_ANE_FUNCTION(airVideoEnablePause);
-DEFINE_ANE_FUNCTION(airVideoEnableExit);
-DEFINE_ANE_FUNCTION(airVideoLoadVideo);
-DEFINE_ANE_FUNCTION(airVideoShowPlayer);
-DEFINE_ANE_FUNCTION(airVideoHidePlayer);
-DEFINE_ANE_FUNCTION(airVideoDisposePlayer);
+DEFINE_ANE_FUNCTION(anefncEnablePause);
+DEFINE_ANE_FUNCTION(anefncEnableExit);
+DEFINE_ANE_FUNCTION(anefncLoadVideo);
+DEFINE_ANE_FUNCTION(anefncShowPlayer);
+DEFINE_ANE_FUNCTION(anefncHidePlayer);
+DEFINE_ANE_FUNCTION(anefncDisposePlayer);
 
 // ANE Setup
 void NativeVideoInitializer(void** extDataToSet, FREContextInitializer* ctxInitializerToSet, FREContextFinalizer* ctxFinalizerToSet);
