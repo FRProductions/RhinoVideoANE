@@ -209,11 +209,10 @@ void NativeVideoContextInitializer(void* extData, const uint8_t* ctxType, FRECon
                                 uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet)
 {
   // Register links between AS3 and Objective-C.
-  // note: don't forget to modify the nbFuntionsToLink integer when adding/removing functions
-  NSInteger nbFuntionsToLink = 6;
-  *numFunctionsToTest = nbFuntionsToLink;
+  // note: don't forget to modify the numFunctionsToTest integer when adding/removing functions
+  *numFunctionsToTest = 6;
   
-  FRENamedFunction* func = (FRENamedFunction*) malloc(sizeof(FRENamedFunction) * nbFuntionsToLink);
+  FRENamedFunction* func = (FRENamedFunction*) malloc(sizeof(FRENamedFunction) * *numFunctionsToTest);
   
   func[0].name = (const uint8_t*) "anefncEnablePause";
   func[0].functionData = NULL;
