@@ -1,4 +1,4 @@
-package com.freshplanet.ane.AirVideo.video;
+package com.rhino.ane.NativeVideo.video;
 
 import android.content.Context;
 import android.util.AttributeSet;

@@ -1,4 +1,4 @@
-package com.freshplanet.ane.AirVideo;
+package com.rhino.ane.NativeVideo;
 
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -11,14 +11,14 @@ import android.widget.VideoView;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
-import com.freshplanet.ane.AirVideo.functions.DisposePlayerFunction;
-import com.freshplanet.ane.AirVideo.functions.EnableExitFunction;
-import com.freshplanet.ane.AirVideo.functions.EnablePauseFunction;
-import com.freshplanet.ane.AirVideo.functions.HidePlayerFunction;
-import com.freshplanet.ane.AirVideo.functions.LoadVideoFunction;
-import com.freshplanet.ane.AirVideo.functions.ShowPlayerFunction;
-import com.freshplanet.ane.AirVideo.video.CustomMediaController;
-import com.freshplanet.ane.AirVideo.video.CustomVideoView;
+import com.rhino.ane.NativeVideo.functions.DisposePlayerFunction;
+import com.rhino.ane.NativeVideo.functions.EnableExitFunction;
+import com.rhino.ane.NativeVideo.functions.EnablePauseFunction;
+import com.rhino.ane.NativeVideo.functions.HidePlayerFunction;
+import com.rhino.ane.NativeVideo.functions.LoadVideoFunction;
+import com.rhino.ane.NativeVideo.functions.ShowPlayerFunction;
+import com.rhino.ane.NativeVideo.video.CustomMediaController;
+import com.rhino.ane.NativeVideo.video.CustomVideoView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -174,7 +174,6 @@ public class ExtensionContext extends FREContext implements
   }
 
   public void onPlay() {
-    /**/log("isPlaying? " + mVideoView.isPlaying());
     dispatchStatusEventAsync("VIDEO_PLAYED");
   }
 

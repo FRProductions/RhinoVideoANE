@@ -1,20 +1,20 @@
-package com.freshplanet.ane.AirVideo.functions;
+package com.rhino.ane.NativeVideo.functions;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.adobe.fre.FREObject;
-import com.freshplanet.ane.AirVideo.Extension;
+import com.rhino.ane.NativeVideo.Extension;
 
-public class EnablePauseFunction implements FREFunction
+public class LoadVideoFunction implements FREFunction
 {
   @Override
   public FREObject call(FREContext context, FREObject[] args)
   {
-    boolean enable;
-    try { enable = args[0].getAsBool(); }
+    String url;
+    try { url = args[0].getAsString(); }
     catch (Exception e) { e.printStackTrace(); return null; }
 
-    Extension.context.enablePause(enable);
+    Extension.context.loadVideo(url);
     return null;
   }
 }

@@ -1,11 +1,11 @@
-package com.freshplanet.ane.AirVideo.functions;
+package com.rhino.ane.NativeVideo.functions;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.adobe.fre.FREObject;
-import com.freshplanet.ane.AirVideo.Extension;
+import com.rhino.ane.NativeVideo.Extension;
 
-public class EnableExitFunction implements FREFunction
+public class EnablePauseFunction implements FREFunction
 {
   @Override
   public FREObject call(FREContext context, FREObject[] args)
@@ -14,7 +14,7 @@ public class EnableExitFunction implements FREFunction
     try { enable = args[0].getAsBool(); }
     catch (Exception e) { e.printStackTrace(); return null; }
 
-    Extension.context.enableExit(enable);
+    Extension.context.enablePause(enable);
     return null;
   }
 }

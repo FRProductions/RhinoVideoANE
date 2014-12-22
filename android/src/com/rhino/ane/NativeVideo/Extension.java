@@ -1,4 +1,4 @@
-package com.freshplanet.ane.AirVideo;
+package com.rhino.ane.NativeVideo;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREExtension;

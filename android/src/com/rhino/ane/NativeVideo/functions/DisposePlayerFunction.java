@@ -1,9 +1,9 @@
-package com.freshplanet.ane.AirVideo.functions;
+package com.rhino.ane.NativeVideo.functions;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.adobe.fre.FREObject;
-import com.freshplanet.ane.AirVideo.Extension;
+import com.rhino.ane.NativeVideo.Extension;
 
 public class DisposePlayerFunction implements FREFunction
 {

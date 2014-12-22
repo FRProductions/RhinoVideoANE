@@ -5,12 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.adobe.fre.FREFunction;
-import com.adobe.fre.FREObject;
-import com.freshplanet.ane.AirVideo.Extension;
-
-import java.util.Map;
-
 public class MainActivity extends ActionBarActivity {
 
     @Override
