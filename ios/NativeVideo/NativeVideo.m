@@ -1,12 +1,12 @@
-#import "AirVideo.h"
+#import "NativeVideo.h"
 
-FREContext AirVideoCtx = nil;
+FREContext NativeVideoCtx = nil;
 
 /**************************************************************************/
 #pragma mark INSTANCE PROPERTIES
 /**************************************************************************/
 
-@interface AirVideo()
+@interface NativeVideo()
 
 @end
 
@@ -14,7 +14,7 @@ FREContext AirVideoCtx = nil;
 #pragma mark INSTANCE INIT / DEALLOC
 /**************************************************************************/
 
-@implementation AirVideo
+@implementation NativeVideo
 
 - (id)init
 {
@@ -43,21 +43,21 @@ FREContext AirVideoCtx = nil;
   self.player.controlStyle = MPMovieControlStyleNone;
 
   // init to full screen size
-  CGSize scrsiz = [AirVideo screenSize];
+  CGSize scrsiz = [NativeVideo screenSize];
   CGRect tmpfrm = self.player.view.frame;
   tmpfrm.origin.x = 0;
   tmpfrm.origin.y = 0;
   tmpfrm.size.width = scrsiz.width;
   tmpfrm.size.height = scrsiz.height;
   self.player.view.frame = tmpfrm;
-  [AirVideo log:[NSString stringWithFormat:@"init player size to %@",NSStringFromCGRect(tmpfrm)]];
+  [NativeVideo log:[NSString stringWithFormat:@"init player size to %@",NSStringFromCGRect(tmpfrm)]];
 
   // register for player notifications
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerLoadStateDidChange:) name:MPMoviePlayerLoadStateDidChangeNotification object:self.player];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerPlaybackStateDidChange:) name:MPMoviePlayerPlaybackStateDidChangeNotification object:self.player];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerPlaybackDidFinish:) name:MPMoviePlayerPlaybackDidFinishNotification object:self.player];
 
-  [AirVideo log:@"init movie player controller"];
+  [NativeVideo log:@"init movie player controller"];
 }
 
 - (void)disposePlayer
@@ -75,7 +75,7 @@ FREContext AirVideoCtx = nil;
   // remove player reference
   _player = nil;
 
-  [AirVideo log:@"disposed movie player controller"];
+  [NativeVideo log:@"disposed movie player controller"];
 }
 
 - (void)showPlayer
@@ -84,7 +84,7 @@ FREContext AirVideoCtx = nil;
   
   if(!self.player.view.superview) {
     UIView *rootView = [[[[UIApplication sharedApplication] keyWindow] rootViewController] view];
-    [rootView addSubview:[[AirVideo instance].player view]];
+    [rootView addSubview:[[NativeVideo instance].player view]];
   }
 }
 
@@ -102,7 +102,7 @@ FREContext AirVideoCtx = nil;
 {
   // adjust player controls once ready to play
   if(self.player.loadState == (MPMovieLoadStatePlayable | MPMovieLoadStatePlaythroughOK)) {
-    [AirVideo log:@"load state is playable and playthrough OK; adjusting control style per pause/exit permissions"];
+    [NativeVideo log:@"load state is playable and playthrough OK; adjusting control style per pause/exit permissions"];
     if(self.isPauseEnabled && self.isExitEnabled) { self.player.controlStyle = MPMovieControlStyleFullscreen; }
     else                                          { self.player.controlStyle = MPMovieControlStyleNone;       }
   }
@@ -111,10 +111,10 @@ FREContext AirVideoCtx = nil;
 - (void)playerPlaybackStateDidChange:(NSNotification *)notification
 {
   if(self.player.playbackState==MPMoviePlaybackStatePlaying) {
-    [AirVideo dispatchAS3StatusEvent:@"VIDEO_PLAYED" withInfo:@""];
+    [NativeVideo dispatchAS3StatusEvent:@"VIDEO_PLAYED" withInfo:@""];
   }
   else if(self.player.playbackState==MPMoviePlaybackStatePaused) {
-    [AirVideo dispatchAS3StatusEvent:@"VIDEO_PAUSED" withInfo:@""];
+    [NativeVideo dispatchAS3StatusEvent:@"VIDEO_PAUSED" withInfo:@""];
   }
 }
 
@@ -125,15 +125,15 @@ FREContext AirVideoCtx = nil;
   switch([fnsrsn intValue])
   {
     case MPMovieFinishReasonPlaybackEnded: {
-      [AirVideo dispatchAS3StatusEvent:@"VIDEO_COMPLETED" withInfo:@""];
+      [NativeVideo dispatchAS3StatusEvent:@"VIDEO_COMPLETED" withInfo:@""];
     } break;
     case MPMovieFinishReasonPlaybackError: {
       NSError *err = [notification.userInfo objectForKey:@"error"];
-      if(err) { [AirVideo log:[NSString stringWithFormat:@"playback error: %@",err]]; }
-      [AirVideo dispatchAS3StatusEvent:@"VIDEO_ERROR" withInfo:@""];
+      if(err) { [NativeVideo log:[NSString stringWithFormat:@"playback error: %@",err]]; }
+      [NativeVideo dispatchAS3StatusEvent:@"VIDEO_ERROR" withInfo:@""];
     } break;
     case MPMovieFinishReasonUserExited: {
-      [AirVideo dispatchAS3StatusEvent:@"VIDEO_USER_EXITED" withInfo:@""];
+      [NativeVideo dispatchAS3StatusEvent:@"VIDEO_USER_EXITED" withInfo:@""];
     } break;
   }
 }
@@ -144,14 +144,14 @@ FREContext AirVideoCtx = nil;
 
 + (void)dispatchAS3StatusEvent:(NSString *)eventName withInfo:(NSString *)info
 {
-  if(AirVideoCtx != nil) {
-    FREDispatchStatusEventAsync(AirVideoCtx, (const uint8_t *)[eventName UTF8String], (const uint8_t *)[info UTF8String]);
+  if(NativeVideoCtx != nil) {
+    FREDispatchStatusEventAsync(NativeVideoCtx, (const uint8_t *)[eventName UTF8String], (const uint8_t *)[info UTF8String]);
   }
 }
 
 + (void)log:(NSString *)message
 {
-  [AirVideo dispatchAS3StatusEvent:@"LOG_MESSAGE" withInfo:message];
+  [NativeVideo dispatchAS3StatusEvent:@"LOG_MESSAGE" withInfo:message];
 }
 
 /**
@@ -175,9 +175,9 @@ FREContext AirVideoCtx = nil;
 #pragma mark CLASS METHODS - SINGLETON
 /**************************************************************************/
 
-+ (AirVideo *)instance
++ (NativeVideo *)instance
 {
-  static AirVideo *singletonInstance = nil;
+  static NativeVideo *singletonInstance = nil;
   
   // this code will run only once
   static dispatch_once_t onceToken;
@@ -194,18 +194,18 @@ FREContext AirVideoCtx = nil;
 #pragma mark - ANE C INTERFACE
 /**************************************************************************/
 
-void AirVideoInitializer(void** extDataToSet, FREContextInitializer* ctxInitializerToSet, FREContextFinalizer* ctxFinalizerToSet)
+void NativeVideoInitializer(void** extDataToSet, FREContextInitializer* ctxInitializerToSet, FREContextFinalizer* ctxFinalizerToSet)
 {
   *extDataToSet = NULL;
-  *ctxInitializerToSet = &AirVideoContextInitializer;
-  *ctxFinalizerToSet = &AirVideoContextFinalizer;
+  *ctxInitializerToSet = &NativeVideoContextInitializer;
+  *ctxFinalizerToSet = &NativeVideoContextFinalizer;
 }
 
-void AirVideoFinalizer(void *extData)
+void NativeVideoFinalizer(void *extData)
 {
 }
 
-void AirVideoContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx,
+void NativeVideoContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx,
                                 uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet)
 {
   // Register links between AS3 and Objective-C.
@@ -241,10 +241,10 @@ void AirVideoContextInitializer(void* extData, const uint8_t* ctxType, FREContex
   
   *functionsToSet = func;
   
-  AirVideoCtx = ctx;
+  NativeVideoCtx = ctx;
 }
 
-void AirVideoContextFinalizer(FREContext ctx)
+void NativeVideoContextFinalizer(FREContext ctx)
 {
 }
 
@@ -255,16 +255,16 @@ void AirVideoContextFinalizer(FREContext ctx)
 DEFINE_ANE_FUNCTION(airVideoEnablePause)
 {
   BOOL enb = getBOOLParameter(argv[0]);
-  [AirVideo instance].isPauseEnabled = enb;
-  [AirVideo log:[NSString stringWithFormat:@"enabled pause: %d",enb]];
+  [NativeVideo instance].isPauseEnabled = enb;
+  [NativeVideo log:[NSString stringWithFormat:@"enabled pause: %d",enb]];
   return nil;
 }
 
 DEFINE_ANE_FUNCTION(airVideoEnableExit)
 {
   BOOL enb = getBOOLParameter(argv[0]);
-  [AirVideo instance].isExitEnabled = enb;
-  [AirVideo log:[NSString stringWithFormat:@"enabled exit: %d",enb]];
+  [NativeVideo instance].isExitEnabled = enb;
+  [NativeVideo log:[NSString stringWithFormat:@"enabled exit: %d",enb]];
   return nil;
 }
 
@@ -276,10 +276,10 @@ DEFINE_ANE_FUNCTION(airVideoLoadVideo)
   // read path argument
   pth = getNSStringParameter(argv[0]);
   if(!pth) {
-    [AirVideo log:@"a valid path must be specified"];
+    [NativeVideo log:@"a valid path must be specified"];
     return nil;
   }
-  [AirVideo log:[NSString stringWithFormat:@"loading video %@",pth]];
+  [NativeVideo log:[NSString stringWithFormat:@"loading video %@",pth]];
   
   // create video URL
   if([pth hasPrefix:@"http"]) {
@@ -291,37 +291,37 @@ DEFINE_ANE_FUNCTION(airVideoLoadVideo)
     url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",baspth,pth]];
     NSError *unreachableError;
     if([url checkResourceIsReachableAndReturnError:&unreachableError]==NO) {
-      [AirVideo log:[NSString stringWithFormat:@"FileUnreachableError: %@",unreachableError.localizedDescription]];
+      [NativeVideo log:[NSString stringWithFormat:@"FileUnreachableError: %@",unreachableError.localizedDescription]];
       return nil;
     }
   }
   
   // load and play video
-  [[AirVideo instance] initPlayer]; // create player if it hasn't been already
-  [[AirVideo instance].player setContentURL:url];
-  [[AirVideo instance].player play];
-  [AirVideo log:[NSString stringWithFormat:@"initiated play of video %@",url]];
+  [[NativeVideo instance] initPlayer]; // create player if it hasn't been already
+  [[NativeVideo instance].player setContentURL:url];
+  [[NativeVideo instance].player play];
+  [NativeVideo log:[NSString stringWithFormat:@"initiated play of video %@",url]];
   return nil;
 }
 
 DEFINE_ANE_FUNCTION(airVideoShowPlayer)
 {
-  [AirVideo log:@"show player"];
-  [[AirVideo instance] showPlayer];
+  [NativeVideo log:@"show player"];
+  [[NativeVideo instance] showPlayer];
   return nil;
 }
 
 DEFINE_ANE_FUNCTION(airVideoHidePlayer)
 {
-  [AirVideo log:@"hide player"];
-  [[AirVideo instance] hidePlayer];
+  [NativeVideo log:@"hide player"];
+  [[NativeVideo instance] hidePlayer];
   return nil;
 }
 
 DEFINE_ANE_FUNCTION(airVideoDisposePlayer)
 {
-  [AirVideo log:@"dispose player"];
-  [[AirVideo instance] disposePlayer];
+  [NativeVideo log:@"dispose player"];
+  [[NativeVideo instance] disposePlayer];
   return nil;
 }
 

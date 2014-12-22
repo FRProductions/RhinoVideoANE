@@ -25,7 +25,7 @@
             <arg line="SYMROOT=../temp/ios/build/"/>
         </exec>
 
-        <copy file="../temp/ios/build/Release-iphoneos/lib${name}.a" todir="../temp/ios" overwrite="true"/>
+        <copy file="../temp/ios/build/Release-iphoneos/${packageId}.a" todir="../temp/ios" overwrite="true"/>
 
         <delete dir="../temp/ios/build/"/>
     </target>
@@ -52,7 +52,7 @@
         </javac>
 
         <mkdir dir="../temp/android"/>
-        <jar basedir="../android/temp/classes" destfile="../temp/android/${name}.jar"/>
+        <jar basedir="../android/temp/classes" destfile="../temp/android/${packageId}.jar"/>
         <copy todir="../temp/android/res/">
             <fileset dir="../android/res"/>
         </copy>

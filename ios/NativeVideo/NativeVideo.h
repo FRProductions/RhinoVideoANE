@@ -1,7 +1,7 @@
 #import "FlashRuntimeExtensions.h"
 #import <MediaPlayer/MediaPlayer.h>
 
-@interface AirVideo : NSObject
+@interface NativeVideo : NSObject
 
 /**************************************************************************/
 #pragma mark INSTANCE PROPERTIES
@@ -26,7 +26,7 @@
 /**
  * @return The singleton instance.
  */
-+ (AirVideo *)instance;
++ (NativeVideo *)instance;
 
 @end
 
@@ -39,10 +39,10 @@ DEFINE_ANE_FUNCTION(airVideoHidePlayer);
 DEFINE_ANE_FUNCTION(airVideoDisposePlayer);
 
 // ANE Setup
-void AirVideoInitializer(void** extDataToSet, FREContextInitializer* ctxInitializerToSet, FREContextFinalizer* ctxFinalizerToSet);
-void AirVideoFinalizer(void *extData);
-void AirVideoContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet);
-void AirVideoContextFinalizer(FREContext ctx);
+void NativeVideoInitializer(void** extDataToSet, FREContextInitializer* ctxInitializerToSet, FREContextFinalizer* ctxFinalizerToSet);
+void NativeVideoFinalizer(void *extData);
+void NativeVideoContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctionsToTest, const FRENamedFunction** functionsToSet);
+void NativeVideoContextFinalizer(FREContext ctx);
 
 // Utility
 NSString * getNSStringParameter(FREObject freobj);
