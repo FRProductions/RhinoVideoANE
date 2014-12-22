@@ -1,4 +1,4 @@
-package com.freshplanet.ane.AirVideo
+package com.rhino.ane.NativeVideo
 {
   import flash.events.Event;
   import flash.events.EventDispatcher;
@@ -6,7 +6,7 @@ package com.freshplanet.ane.AirVideo
   import flash.external.ExtensionContext;
   import flash.system.Capabilities;
 
-  public class AirVideo extends EventDispatcher
+  public class NativeVideo extends EventDispatcher
   {
     /**************************************************************************
      * INSTANCE PROPERTIES
@@ -19,13 +19,13 @@ package com.freshplanet.ane.AirVideo
      * INSTANCE CONSTRUCTOR
      **************************************************************************/
     
-    public function AirVideo()
+    public function NativeVideo()
     {
       // singleton pattern
       if(sInstance) { throw new Error("Singleton... use instance()"); }
 
       // ensure we can continue
-      if(!isSupported) { throw Error('AirVideo not supported'); }
+      if(!isSupported) { throw Error('not supported'); }
       
       // init
       mContext = ExtensionContext.createExtensionContext(EXTENSION_ID,null);
@@ -125,7 +125,7 @@ package com.freshplanet.ane.AirVideo
      */
     private function log(message:String):void
     {
-      if(mLoggingEnabled) { trace("[AirVideo] " + message); }
+      if(mLoggingEnabled) { trace("[NativeVideo] " + message); }
     }
     
     /**************************************************************************
@@ -133,10 +133,10 @@ package com.freshplanet.ane.AirVideo
      **************************************************************************/
     
     // singleton pattern: there may be only one of these objects ever created
-    private static var sInstance:AirVideo = null;
+    private static var sInstance:NativeVideo = null;
 
     // extension ID
-    private static const EXTENSION_ID:String = "com.freshplanet.AirVideo";
+    private static const EXTENSION_ID:String = "com.rhino.ane.NativeVideo";
     
     // event strings dispatched
     private static const LOG_MESSAGE          : String = "LOG_MESSAGE";
@@ -151,15 +151,15 @@ package com.freshplanet.ane.AirVideo
      **************************************************************************/
     
     // singleton pattern
-    public static function instance():AirVideo
+    public static function instance():NativeVideo
     {
-      if(!sInstance) { sInstance = new AirVideo(); }
+      if(!sInstance) { sInstance = new NativeVideo(); }
       return sInstance;
     }
 
     /**
-     * AirVideo supports iOS and Android devices.
-     * @return true if AirVideo is supported.
+     * NativeVideo supports iOS and Android devices.
+     * @return true if NativeVideo is supported.
      */
     public static function get isSupported():Boolean
     {

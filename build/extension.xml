@@ -1,20 +1,20 @@
 <extension xmlns="http://ns.adobe.com/air/extension/3.1">
-  <id>com.freshplanet.AirVideo</id>
+  <id>com.rhino.ane.NativeVideo</id>
   <versionNumber>1.0</versionNumber>
   <platforms>
     <platform name="iPhone-ARM">
             <applicationDeployment>
-                <nativeLibrary>libAirVideo.a</nativeLibrary>
-                <initializer>AirVideoInitializer</initializer> 
-                <finalizer>AirVideoFinalizer</finalizer>
+                <nativeLibrary>com.rhino.ane.NativeVideo.a</nativeLibrary>
+                <initializer>NativeVideoInitializer</initializer> 
+                <finalizer>NativeVideoFinalizer</finalizer>
             </applicationDeployment>
     </platform>
- 
+
    <platform name="Android-ARM"> 
         <applicationDeployment> 
-            <nativeLibrary>libAirVideo.jar</nativeLibrary> 
-            <initializer>com.freshplanet.ane.AirVideo.Extension</initializer> 
-            <finalizer>com.freshplanet.ane.AirVideo.Extension</finalizer> 
+            <nativeLibrary>com.rhino.ane.NativeVideo.jar</nativeLibrary> 
+            <initializer>com.rhino.ane.NativeVideo.Extension</initializer> 
+            <finalizer>com.rhino.ane.NativeVideo.Extension</finalizer> 
         </applicationDeployment>
     </platform>
     
