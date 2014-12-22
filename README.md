@@ -7,9 +7,9 @@ This is an [AIR Native Extension](http://www.adobe.com/devnet/air/native-extensi
 Installation
 ---------
 
-The ANE binary file is located at `bin\com.rhino.ane.NativeVideo.ane'.
+The ANE binary file is located at `bin\com.rhino.ane.NativeVideo.ane`.
 
-Native Extension ID is `com.rhino.ane.NativeVideo`.
+The ANE ID is `com.rhino.ane.NativeVideo`.
 
 
 Usage
