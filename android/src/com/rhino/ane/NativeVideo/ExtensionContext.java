@@ -42,7 +42,7 @@ public class ExtensionContext extends FREContext implements
   public ExtensionContext() {}
   
   /**************************************************************************
-   * INSTANCE METHODS
+   * INSTANCE METHODS - FREContext
    **************************************************************************/
   
   @Override
@@ -93,7 +93,7 @@ public class ExtensionContext extends FREContext implements
     // add VideoView to root container
     ViewGroup rootContainer = this.getRootContainer();
     VideoView videoView = this.getVideoView();
-    FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+    FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
     layoutParams.gravity = Gravity.CENTER_HORIZONTAL;
     rootContainer.addView(videoView, layoutParams);
     videoView.clearFocus();
