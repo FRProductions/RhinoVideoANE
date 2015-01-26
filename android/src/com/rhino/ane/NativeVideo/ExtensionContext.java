@@ -81,9 +81,27 @@ public class ExtensionContext extends FREContext implements
 
   public void loadVideo(String url)
   {
-    log("loading video " + Uri.parse(url));
+    log("loading video: input URL is " + Uri.parse(url));
+/*
     // TODO: support local videos
-    getVideoView().setVideoURI(Uri.parse(url));
+    Activity appaty = this.getActivity();
+    ////log("application Activity: " + appaty);
+    Context appctx = appaty.getApplicationContext();
+    ////log("application Context: " + appctx);
+    try {
+      String[] strarr = appctx.getAssets().list("assets");
+      log(Arrays.deepToString(strarr));
+    } catch (IOException e) {
+      e.printStackTrace();
+      log("exception occurred: " + e.toString());
+    }
+    url = "android.resource://" + appctx.getPackageName() + "/raw/videos/subscriptionPromo";
+    // unfortunately the URL is still not found... needs further development
+*/
+
+    Uri uri = Uri.parse(url);
+    log("loading video: modified URL is " + uri);
+    getVideoView().setVideoURI(uri);
   }
 
   public void showPlayer()
