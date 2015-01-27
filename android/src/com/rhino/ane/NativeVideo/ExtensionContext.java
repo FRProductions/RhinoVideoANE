@@ -1,5 +1,7 @@
 package com.rhino.ane.NativeVideo;
 
+import android.app.Activity;
+import android.content.Context;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.view.Gravity;
@@ -20,6 +22,8 @@ import com.rhino.ane.NativeVideo.functions.ShowPlayerFunction;
 import com.rhino.ane.NativeVideo.video.CustomMediaController;
 import com.rhino.ane.NativeVideo.video.CustomVideoView;
 
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -82,7 +86,7 @@ public class ExtensionContext extends FREContext implements
   public void loadVideo(String url)
   {
     log("loading video: input URL is " + Uri.parse(url));
-/*
+
     // TODO: support local videos
     Activity appaty = this.getActivity();
     ////log("application Activity: " + appaty);
@@ -95,9 +99,12 @@ public class ExtensionContext extends FREContext implements
       e.printStackTrace();
       log("exception occurred: " + e.toString());
     }
-    url = "android.resource://" + appctx.getPackageName() + "/raw/videos/subscriptionPromo";
-    // unfortunately the URL is still not found... needs further development
-*/
+    url = "android.resource://" + appctx.getPackageName() + "/raw/icon";
+
+    log("resource ID is " + this.getResourceId("icon.jpg"));
+    log("resource ID is " + this.getResourceId("drawable.white_x"));
+    log("resource ID is " + this.getResourceId("raw.icon"));
+    log("resource ID is " + this.getResourceId("raw.subscription_promo"));
 
     Uri uri = Uri.parse(url);
     log("loading video: modified URL is " + uri);
