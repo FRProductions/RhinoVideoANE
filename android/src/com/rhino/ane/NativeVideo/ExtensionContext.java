@@ -22,8 +22,6 @@ import com.rhino.ane.NativeVideo.functions.ShowPlayerFunction;
 import com.rhino.ane.NativeVideo.video.CustomMediaController;
 import com.rhino.ane.NativeVideo.video.CustomVideoView;
 
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -85,30 +83,31 @@ public class ExtensionContext extends FREContext implements
 
   public void loadVideo(String url)
   {
-    log("loading video: input URL is " + Uri.parse(url));
+    log("loading video: input URL is " + url);
 
-    // TODO: support local videos
-    Activity appaty = this.getActivity();
-    ////log("application Activity: " + appaty);
-    Context appctx = appaty.getApplicationContext();
-    ////log("application Context: " + appctx);
-    try {
-      String[] strarr = appctx.getAssets().list("assets");
-      log(Arrays.deepToString(strarr));
-    } catch (IOException e) {
-      e.printStackTrace();
-      log("exception occurred: " + e.toString());
+    // local video support
+    if(!url.startsWith("http://"))
+    {
+      // create Android local path to resources (not assets - will not work)
+
+      // get ApplicationContext
+      Activity appaty = this.getActivity();
+      Context appctx = appaty.getApplicationContext();
+
+      // extract video filename;
+      // assume input URL will be of the form: "assets/videos/subscriptionPromo.mp4"
+      //   and will contain at least one '/' and one trailing '.'
+      int slslstidx = url.lastIndexOf('/');   // slash last index
+      int prdlstidx = url.lastIndexOf('.');   // period last index
+      if(slslstidx>=0 && prdlstidx>slslstidx+1) {
+        String fnm = url.substring(slslstidx+1,prdlstidx);
+        url = "android.resource://" + appctx.getPackageName() + "/raw/" + fnm;
+      }
     }
-    url = "android.resource://" + appctx.getPackageName() + "/raw/icon";
 
-    log("resource ID is " + this.getResourceId("icon.jpg"));
-    log("resource ID is " + this.getResourceId("drawable.white_x"));
-    log("resource ID is " + this.getResourceId("raw.icon"));
-    log("resource ID is " + this.getResourceId("raw.subscription_promo"));
-
-    Uri uri = Uri.parse(url);
-    log("loading video: modified URL is " + uri);
-    getVideoView().setVideoURI(uri);
+    // load video
+    log("loading video: modified URL is " + url);
+    getVideoView().setVideoURI(Uri.parse(url));
   }
 
   public void showPlayer()
