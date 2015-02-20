@@ -88,15 +88,16 @@ public class ExtensionContext extends FREContext implements
     // local video support
     if(!url.startsWith("http://"))
     {
-      // create Android local path to resources (not assets - will not work)
+      // assume: video files have been moved from assets/assets/videos -> res/raw
+      // note: video playback only works if videos are in res/raw folder, not in assets (!)
 
       // get ApplicationContext
       Activity appaty = this.getActivity();
       Context appctx = appaty.getApplicationContext();
 
-      // extract video filename;
-      // assume input URL will be of the form: "assets/videos/subscriptionPromo.mp4"
-      //   and will contain at least one '/' and one trailing '.'
+      // create res/raw video file path
+      // assume input URL is of the form: "assets/videos/<videoFilename>.<extension>"
+      //   and contains at least one '/' and one trailing '.' for an extension
       int slslstidx = url.lastIndexOf('/');   // slash last index
       int prdlstidx = url.lastIndexOf('.');   // period last index
       if(slslstidx>=0 && prdlstidx>slslstidx+1) {
@@ -216,7 +217,6 @@ public class ExtensionContext extends FREContext implements
    **************************************************************************/
 
   public void log(String message) {
-    /**/System.out.println(message);
     dispatchStatusEventAsync("LOG_MESSAGE", message);
   }
 
