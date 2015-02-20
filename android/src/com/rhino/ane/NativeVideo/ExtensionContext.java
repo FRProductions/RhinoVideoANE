@@ -217,6 +217,7 @@ public class ExtensionContext extends FREContext implements
    **************************************************************************/
 
   public void log(String message) {
+    /**/System.out.println(message);
     dispatchStatusEventAsync("LOG_MESSAGE", message);
   }
 
