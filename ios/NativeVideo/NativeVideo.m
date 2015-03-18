@@ -290,7 +290,9 @@ DEFINE_ANE_FUNCTION(anefncLoadVideo)
     url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",baspth,pth]];
     NSError *unreachableError;
     if([url checkResourceIsReachableAndReturnError:&unreachableError]==NO) {
-      [NativeVideo log:[NSString stringWithFormat:@"FileUnreachableError: %@",unreachableError.localizedDescription]];
+      NSString *errmsg = [NSString stringWithFormat:@"FileUnreachableError: %@",unreachableError.localizedDescription];
+      [NativeVideo log:errmsg];
+      [NativeVideo dispatchAS3StatusEvent:@"VIDEO_ERROR" withInfo:errmsg];
       return nil;
     }
   }
