@@ -210,7 +210,7 @@ void NativeVideoContextInitializer(void* extData, const uint8_t* ctxType, FRECon
 {
   // Register links between AS3 and Objective-C.
   // note: don't forget to modify the numFunctionsToTest integer when adding/removing functions
-  *numFunctionsToTest = 6;
+  *numFunctionsToTest = 7;
   
   FRENamedFunction* func = (FRENamedFunction*) malloc(sizeof(FRENamedFunction) * *numFunctionsToTest);
   
@@ -237,6 +237,10 @@ void NativeVideoContextInitializer(void* extData, const uint8_t* ctxType, FRECon
   func[5].name = (const uint8_t*) "anefncDisposePlayer";
   func[5].functionData = NULL;
   func[5].function = &anefncDisposePlayer;
+  
+  func[6].name = (const uint8_t*) "anefncExitApp";
+  func[6].functionData = NULL;
+  func[6].function = &anefncExitApp;
   
   *functionsToSet = func;
   
@@ -323,6 +327,13 @@ DEFINE_ANE_FUNCTION(anefncDisposePlayer)
 {
   [NativeVideo log:@"dispose player"];
   [[NativeVideo instance] disposePlayer];
+  return nil;
+}
+
+DEFINE_ANE_FUNCTION(anefncExitApp)
+{
+  [NativeVideo log:@"exit app"];
+  abort(); // causes the app to generate a crash log and terminate
   return nil;
 }
 

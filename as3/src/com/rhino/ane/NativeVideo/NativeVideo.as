@@ -101,6 +101,15 @@ package com.rhino.ane.NativeVideo
       mContext.call("anefncDisposePlayer");
     }
     
+    /**
+     * Exits the app - iOS only.
+     */
+    public function exitApp():void
+    {
+      if(!isIOS) { log('not supported'); return; }
+      mContext.call("anefncExitApp");
+    }
+    
     /**************************************************************************
      * INSTANCE METHODS - PRIVATE
      **************************************************************************/
@@ -161,12 +170,16 @@ package com.rhino.ane.NativeVideo
      * NativeVideo supports iOS and Android devices.
      * @return true if NativeVideo is supported.
      */
-    public static function get isSupported():Boolean
-    {
-      var isIOS:Boolean = (Capabilities.manufacturer.indexOf("iOS") != -1);
-      var isAndroid:Boolean = (Capabilities.manufacturer.indexOf("Android") != -1)
+    public static function get isSupported():Boolean {
       return isIOS || isAndroid;
     }
+    
+    private static function isIOS():Boolean {
+      return (Capabilities.manufacturer.indexOf("iOS") != -1);
+    }
 
+    private static function isAndroid():Boolean {
+      return (Capabilities.manufacturer.indexOf("Android") != -1);
+    }
   }
 }

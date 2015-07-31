@@ -37,6 +37,7 @@ DEFINE_ANE_FUNCTION(anefncLoadVideo);
 DEFINE_ANE_FUNCTION(anefncShowPlayer);
 DEFINE_ANE_FUNCTION(anefncHidePlayer);
 DEFINE_ANE_FUNCTION(anefncDisposePlayer);
+DEFINE_ANE_FUNCTION(anefncExitApp);
 
 // ANE Setup
 void NativeVideoInitializer(void** extDataToSet, FREContextInitializer* ctxInitializerToSet, FREContextFinalizer* ctxFinalizerToSet);
